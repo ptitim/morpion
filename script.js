@@ -173,8 +173,8 @@ function initBouton(){
       for (var i = 0; i < bout.length; i++) {
         bout[i].disabled = false;
       }
-      bout[0].disabled = true;
-      difficulter = FA;
+      bout[2].disabled = true;
+      difficulter = DIF;
 };
 initBouton();
 

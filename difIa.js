@@ -14,12 +14,13 @@ function medium (plateau, tab){
   var intel = false; //pour le cas ou l'ia joue par rapport aujouer sinon joue au hasard
   for (var i = 0; i < tab.length; i++) {
     var compteur = 0;
+    var e = undefined;
     for (var j = 0; j < tab[j].length; j++) {
       if(tab[i][j].value == PLAYER){
           compteur++;
       }
       if(tabIa[i][j].value == 0){
-          var e = tab[i][j];
+          e = tab[i][j];
       }
     }
     if(compteur == 2){
@@ -46,17 +47,19 @@ function hard(plateau, tab){
   //verifie si elle peu gagner
   for (var i = 0; i < tab.length; i++) {
     var compteur = 0;
+    var e = undefined;
     for (var j = 0; j < tab[j].length; j++) {
       if(tab[i][j].value == IA){
           compteur++;
       }
       if(tabIa[i][j].value == 0){
-          var e = tab[i][j];
+          e = tab[i][j];
       }
     }
     if(compteur == 2){
-      intel = true;
-      if(e){
+      if(e && e.value != PLAYER){
+        console.log("win ? " + compteur);
+        intel = true;
           console.log("ia joue pour gagnez");
           return e;
       }
@@ -64,14 +67,16 @@ function hard(plateau, tab){
   }
   for (var i = 0; i < tab.length; i++) {
     var compteur = 0;
+    var e = undefined;
     for (var j = 0; j < tab[j].length; j++) {
       if(tab[i][j].value == PLAYER){
           compteur++;
       }
       if(tabIa[i][j].value == 0){
-          var e = tab[i][j];
+          e = tab[i][j];
       }
     }
+    console.log(compteur);
     if(compteur == 2){
       intel = true;
       if(e){
@@ -127,11 +132,9 @@ function hard(plateau, tab){
       }
     }
   }
-  if(!intel){
     var x = Math.floor(Math.random()*plateau.length);
     var e = plateau[x];
     console.log("ia joue au hasard difficile");
     return e;
-  }
 
 }
