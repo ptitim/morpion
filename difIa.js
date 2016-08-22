@@ -80,6 +80,53 @@ function hard(plateau, tab){
       }
     }
   }
+  for (var i = 0; i < tab.length; i++) {
+    for (var j = 0; j < tab[i].length; j++) {
+      if(tab[i][j].value == IA){
+          if (tab[i][j+1]) {
+            if (tab[i][j+1] == 0) {
+                e = tab[i][j+1];
+                return e;
+            }
+          }else if (tab[i][j-1]) {
+             if (tab[i][j-1] == 0) {
+               e = tab[i][j-1];
+               return e;
+             }
+          }else if (tab[i+1][j]) {
+             if (tab[i+1][j] == 0) {
+               e = tab[i+1][j];
+               return e;
+             }
+          }else if (tab[i-1][j]) {
+             if (tab[i-1][j] == 0) {
+               e = tab[i-1][j];
+               return e;
+             }
+          }else if (tab[i-1][j+1]) {
+             if (tab[i-1][j+1] == 0) {
+               e = tab[i-1][j+1];
+               return e;
+             }
+          }else if (tab[i-1][j-1]) {
+             if (tab[i-1][j-1] == 0) {
+               e = tab[i-1][j-1];
+               return e;
+             }
+          }else if (tab[i+1][j+1]) {
+             if (tab[i+1][j+1] == 0) {
+               e = tab[i+1][j+1];
+               return e;
+             }
+          }else if (tab[i+1][j-1]) {
+             if (tab[i+1][j-1] == 0) {
+               e = tab[i+1][j-1];
+               return e;
+             }
+          }
+      }
+    }
+  }
   if(!intel){
     var x = Math.floor(Math.random()*plateau.length);
     var e = plateau[x];

@@ -31,17 +31,15 @@ function playerPlay(event){
 
 function setCase(who ,ele){
 
-  console.log("bonjour",who);
-  if(ele){
-    ele.removeEventListener("click",playerPlay);
-    plateauIa = majTab(plateauIa, ele);
-    nul[indexnul] = who;
-    indexnul++;
-    console.log(nul);
+  if(ele){ //verifies is the html element exist
+    ele.removeEventListener("click",playerPlay);//remove the click
+    plateauIa = majTab(plateauIa, ele);//delete where the player has played
+    nul[indexnul] = who;//list of plays (player and ai)
+    indexnul++;//index of plays
     ele.value = who;
-    var child = ele.children;
-    var index = who -1;
-    child[index].classList.remove('forme');
+    var child = ele.children;//tab of element html (contain cross and cicle)
+    var index = who -1;//select the cross for the player and the circle for the ai
+    child[index].classList.remove('forme');//display's it
     elementJouer.push(child[index]);
     return child;
   }
@@ -142,7 +140,7 @@ function reset(){
   colonne3 = [plateau[0][2],plateau[1][2],plateau[2][2]];
 
   diag1 = [plateau[0][0], plateau[1][1], plateau[2][2]];
-  diag2 = [plateau[0][2], plateau[1][1], plateau[2][0]];
+  diag2 = [plateau[2][0], plateau[1][1], plateau[0][2]];
   return true;
 }
 
