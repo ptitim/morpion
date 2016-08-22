@@ -1,36 +1,20 @@
+function include(fileName){
+  document.write("<script type='text/javascript' src='"+fileName+"'></script>" );
+}
+include("difIa.js");
+
 const PLAYER = 1;
 const IA = 2;
 
-function initTab(){
-  var tab = [];
-  var tableHTML = document.getElementsByClassName('case');
-  var index = 0;
-  nul = [];
-  indexnul = 0;
-  plateauIa = [];
+const FA = "facile";
+const MO = "moyen";
+const DIF = "difficile";
 
-  for (var i = 0; i < tableHTML.length/3; i++) {
-    tab.push([]);
-    for (var j = 0; j < 3; j++) {
-      if(tableHTML[index] != undefined){
-        tab[i][j] = tableHTML[index];
-        plateauIa.push(tableHTML[index]);
-        index++;
-        tab[i][j].value = 0;
-        nul.push(0);
-        tab[i][j].addEventListener("click",playerPlay);
-      }
-    }
-  }
-  console.log(tab);
-  return tab;
-}
 
 //click du joueur
 function playerPlay(event){
-  console.log("click");
   var elementHTML = event.target;
-  elementHTML.removeEventListener("click",playerPlay);
+
   setCase(PLAYER, elementHTML);//mise a jour du plateau avec la valuer du jouer
   if(genereVerif()){
     return;
@@ -46,8 +30,10 @@ function playerPlay(event){
 }
 
 function setCase(who ,ele){
+
   console.log("bonjour",who);
   if(ele){
+    ele.removeEventListener("click",playerPlay);
     plateauIa = majTab(plateauIa, ele);
     nul[indexnul] = who;
     indexnul++;
@@ -74,35 +60,28 @@ function majTab(tab, ele){
 }
 
 function choixIa(){
-  var intel = false; //pour le cas ou l'ia joue par rapport aujouer sinon joue au hasard
-  for (var i = 0; i < tabIa.length; i++) {
-    var compteur = 0;
-    for (var j = 0; j < tabIa[j].length; j++) {
-      if(tabIa[i][j].value == PLAYER){
-          compteur++;
-      }
-      if(tabIa[i][j].value == 0){
-          var e = tabIa[i][j];
-      }
+    if(difficulter == FA){
+        setCase(IA,easy(plateauIa));
+        return true;
+    }else if (difficulter == MO) {
+        setCase(IA,medium(plateauIa,tabIa));
+        return true;
+    }else if (difficulter == DIF) {
+        setCase(IA,hard(plateauIa,tabIa));
+        return true;
     }
-    if(compteur == 2){
-      intel = true;
-      if(e){
-          console.log("ia joue contre le joueur");
-          setCase(IA,e);
-          return true;
-      }
-    }
-  }
-  if(!intel){
-    var x = Math.floor(Math.random()*plateauIa.length);
-    var e = plateauIa[x];
-    console.log("ia joue au hasard");
-    setCase(IA,e);
     return false;
-  }
 }
 
+function choixDifficulter(e){
+    var bouton = document.getElementsByTagName('input');
+    for (var i = 0; i < bouton.length; i++) {
+          bouton[i].disabled = false;
+    }
+    e.disabled = true;
+    difficulter = e.value
+    return e.value;
+}
 //verification des ligne rempli
 function genereVerif(){
 
@@ -153,10 +132,21 @@ function reset(){
   plateauIa = initTab();
   plateau = initTab();
   elementJouer = [];
-   setTimeout(function(){document.getElementById('name').innerHTML =""},1000);
+  setTimeout(function(){document.getElementById('name').innerHTML =""},1000);
+  ligne1 = [plateau[0][0],plateau[0][1],plateau[0][2]];
+  ligne2 = [plateau[1][0],plateau[1][1],plateau[1][2]];
+  ligne3 = [plateau[2][0],plateau[2][1],plateau[2][2]];
+
+  colonne1 = [plateau[0][0],plateau[1][0],plateau[2][0]];
+  colonne2 = [plateau[0][1],plateau[1][1],plateau[2][1]];
+  colonne3 = [plateau[0][2],plateau[1][2],plateau[2][2]];
+
+  diag1 = [plateau[0][0], plateau[1][1], plateau[2][2]];
+  diag2 = [plateau[0][2], plateau[1][1], plateau[2][0]];
   return true;
 }
 
+var difficulter = FA;
 var nul = []; //contient les valeur jouez, permet le reset si toute les case on eter jouer
 var indexnul = 0;//index pour le tableau nul
 var elementJouer = [];//tableau des element html jouez
@@ -179,3 +169,38 @@ var diag1 = [plateau[0][0], plateau[1][1], plateau[2][2]];
 var diag2 = [plateau[0][2], plateau[1][1], plateau[2][0]];
 
 var tabIa =[ligne1,ligne2,ligne3,colonne1,colonne2,colonne3,diag1,diag2];
+
+function initBouton(){
+      var bout = document.getElementsByTagName('input');
+      for (var i = 0; i < bout.length; i++) {
+        bout[i].disabled = false;
+      }
+      bout[0].disabled = true;
+      difficulter = FA;
+};
+initBouton();
+
+function initTab(){
+  var tab = [];
+  var tableHTML = document.getElementsByClassName('case');
+  var index = 0;
+  nul = [];
+  indexnul = 0;
+  plateauIa = [];
+  elementJouer = [];
+
+  for (var i = 0; i < tableHTML.length/3; i++) {
+    tab.push([]);
+    for (var j = 0; j < 3; j++) {
+      if(tableHTML[index] != undefined){
+        tab[i][j] = tableHTML[index];
+        plateauIa.push(tableHTML[index]);
+        index++;
+        tab[i][j].value = 0;
+        nul.push(0);
+        tab[i][j].addEventListener("click",playerPlay);
+      }
+    }
+  }
+  return tab;
+}
