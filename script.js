@@ -6,6 +6,7 @@ function initTab(){
   var tableHTML = document.getElementsByClassName('case');
   var index = 0;
   nul = [];
+  indexnul = 0;
   plateauIa = [];
 
   for (var i = 0; i < tableHTML.length/3; i++) {
@@ -31,7 +32,6 @@ function playerPlay(event){
   var elementHTML = event.target;
   elementHTML.removeEventListener("click",playerPlay);
   setCase(PLAYER, elementHTML);//mise a jour du plateau avec la valuer du jouer
-  console.log("juste avant l'ia");
   choixIa();
   if(genereVerif()){
     return;
@@ -41,14 +41,15 @@ function playerPlay(event){
 }
 
 function setCase(who ,ele){
+  console.log("bonjour",who);
   if(ele){
     plateauIa = majTab(plateauIa, ele);
     nul[indexnul] = who;
     indexnul++;
+    console.log(nul);
     ele.value = who;
     var child = ele.children;
     var index = who -1;
-    console.log(child[index], " ", index);
     child[index].classList.remove('forme');
     elementJouer.push(child[index]);
     return child;
@@ -62,32 +63,43 @@ function majTab(tab, ele){
     if(tab.indexOf(ele) != -1){
       var index = tab.indexOf(ele);
       tab.splice(index, 1);
-      console.log("supprime ",i,",",index);
     }
   }
   return tab;
 }
 
 function choixIa(){
-  var x = Math.floor(Math.random()*plateauIa.length);
-  var element = plateauIa[x];
-  console.log("l'ia joue ",x);
-  setCase(IA,element);
+  var intel = false; //pour le cas ou l'ia joue par rapport aujouer sinon joue au hasard
+  for (var i = 0; i < tabIa.length; i++) {
+    var compteur = 0;
+    for (var j = 0; j < tabIa[j].length; j++) {
+      if(tabIa[i][j].value == PLAYER){
+          compteur++;
+      }
+      if(tabIa[i][j].value == 0){
+          var e = tabIa[i][j];
+      }
+    }
+    if(compteur == 2){
+      intel = true;
+      if(e){
+          console.log("ia joue contre le joueur");
+          setCase(IA,e);
+          return true;
+      }
+    }
+  }
+  if(!intel){
+    var x = Math.floor(Math.random()*plateauIa.length);
+    var e = plateauIa[x];
+    console.log("ia joue au hasard");
+    setCase(IA,e);
+    return false;
+  }
 }
-
 
 //verification des ligne rempli
 function genereVerif(){
-  var ligne1 = [plateau[0][0],plateau[0][1],plateau[0][2]];
-  var ligne2 = [plateau[1][0],plateau[1][1],plateau[1][2]];
-  var ligne3 = [plateau[2][0],plateau[2][1],plateau[2][2]];
-
-  var colonne1 = [plateau[0][0],plateau[1][0],plateau[2][0]];
-  var colonne2 = [plateau[0][1],plateau[1][1],plateau[2][1]];
-  var colonne3 = [plateau[0][2],plateau[1][2],plateau[2][2]];
-
-  var diag1 = [plateau[0][0], plateau[1][1], plateau[2][2]];
-  var diag2 = [plateau[0][2], plateau[1][1], plateau[2][0]];
 
   if(verif(ligne1) || verif(ligne2) || verif(ligne3) || verif(colonne1) || verif(colonne2) || verif(colonne3)
   || verif(diag1) || verif(diag2)){
@@ -133,10 +145,11 @@ function reset(){
   for (var i = 0; i < elementJouer.length; i++) {
     elementJouer[i].classList = 'forme';
   }
-plateauIa = initTab();
-plateau = initTab();
-elementJouer = [];
-return true;
+  plateauIa = initTab();
+  plateau = initTab();
+  elementJouer = [];
+   setTimeout(function(){document.getElementById('name').innerHTML =""},1000);
+  return true;
 }
 
 var nul = []; //contient les valeur jouez, permet le reset si toute les case on eter jouer
@@ -146,8 +159,18 @@ var score = 0;
 var scoreIa = 0;
 var gagnant = 0;//identifiant du gagnant (1 = player)(2 = IA) (0= personne);
 var plateauIa;
-var plateau;
+var plateau = initTab();
 
-window.onload = function(){
-  plateau = initTab();
-}
+//generation des ligne pour la verification et pour l'"ia"
+var ligne1 = [plateau[0][0],plateau[0][1],plateau[0][2]];
+var ligne2 = [plateau[1][0],plateau[1][1],plateau[1][2]];
+var ligne3 = [plateau[2][0],plateau[2][1],plateau[2][2]];
+
+var colonne1 = [plateau[0][0],plateau[1][0],plateau[2][0]];
+var colonne2 = [plateau[0][1],plateau[1][1],plateau[2][1]];
+var colonne3 = [plateau[0][2],plateau[1][2],plateau[2][2]];
+
+var diag1 = [plateau[0][0], plateau[1][1], plateau[2][2]];
+var diag2 = [plateau[0][2], plateau[1][1], plateau[2][0]];
+
+var tabIa =[ligne1,ligne2,ligne3,colonne1,colonne2,colonne3,diag1,diag2];
