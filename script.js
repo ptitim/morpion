@@ -32,6 +32,11 @@ function playerPlay(event){
   var elementHTML = event.target;
   elementHTML.removeEventListener("click",playerPlay);
   setCase(PLAYER, elementHTML);//mise a jour du plateau avec la valuer du jouer
+  if(genereVerif()){
+    return;
+  }else if (nul.indexOf(0) == -1) {
+    setTimeout(reset, 500);
+  }
   choixIa();
   if(genereVerif()){
     return;
