@@ -14,7 +14,11 @@
             MOPRION
           </p>
       </div>
+      <div id="qui">
+
+      </div>
       <div class="difficulter">
+        <input type="button" name="name" value="deux joueur" id="deuxjoueur" onclick="choixDifficulter(this)">
         <input type="button" name="facile" value="facile" id="facile" disabled="true" onclick="choixDifficulter(this)">
         <input type="button" name="moyen" value="moyen" id="moyen" onclick="choixDifficulter(this)">
         <input type="button" name="difficile" value="difficile" id="difficile" onclick="choixDifficulter(this)">
@@ -22,7 +26,7 @@
       <div id="jeu">
           <div id="scoreJoueur">
               <p class="score">
-                Votre score <span id="afgScore">0</span>.
+                Joueur 1 score <span id="afgScore">0</span>.
               </p>
           </div>
           <table>
@@ -71,7 +75,7 @@
           </table>
           <div id="scoreIa">
               <p class="score">
-                Votre score <span id="afgIa">0</span>.
+                Joueur 2 score <span id="afgIa">0</span>.
               </p>
           </div>
       </div>

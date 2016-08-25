@@ -14,14 +14,28 @@ const DIF = "difficile";
 //click du joueur
 function playerPlay(event){
   var elementHTML = event.target;
-
-  setCase(PLAYER, elementHTML);//mise a jour du plateau avec la valuer du jouer
+  var aqui = document.getElementById('qui');
+  if(deuxjoueur){
+      if(qui == PLAYER){
+          console.log("hello");
+          setCase(PLAYER, elementHTML);
+          aqui.innerHTML = "Joueur 2 doit jouer";
+          qui = IA;
+      }else if (qui == IA) {
+          setCase(IA, elementHTML);
+          aqui.innerHTML = "Joueur 1 doit jouer";
+          qui = PLAYER;
+      }
+  }else{
+    setCase(PLAYER, elementHTML);//mise a jour du plateau avec la valuer du joueur
+  }
   if(genereVerif()){
     return;
   }else if (nul.indexOf(0) == -1) {
     setTimeout(reset, 500);
   }
-  choixIa();
+  if(!deuxjoueur)
+    choixIa();
   if(genereVerif()){
     return;
   }else if (nul.indexOf(0) == -1) {
@@ -77,7 +91,15 @@ function choixDifficulter(e){
           bouton[i].disabled = false;
     }
     e.disabled = true;
-    difficulter = e.value
+    if(e.value != "deux joueur"){
+        difficulter = e.value;
+        deuxjoueur = false;
+        document.getElementById('qui').innerHTML = "";
+    }else{
+        deuxjoueur = true;
+        qui = 1;
+        document.getElementById('qui').innerHTML = "Joueur 1 doit jouer"
+    }
     return e.value;
 }
 //verification des ligne rempli
@@ -172,8 +194,10 @@ function initBouton(){
       var bout = document.getElementsByTagName('input');
       for (var i = 0; i < bout.length; i++) {
         bout[i].disabled = false;
+        if(bout[i].value == "difficile"){
+            bout[i].disabled = true;
+        }
       }
-      bout[2].disabled = true;
       difficulter = DIF;
 };
 initBouton();
@@ -202,3 +226,6 @@ function initTab(){
   }
   return tab;
 }
+
+var qui = PLAYER;
+var deuxjoueur = false;

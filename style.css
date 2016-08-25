@@ -11,6 +11,9 @@
     font-family: 'Denk One', sans-serif;
     font-size: 200%; }
 
+#qui {
+  height: 5vh; }
+
 #jeu {
   width: 100vw;
   background-color: silver;
