@@ -85,6 +85,8 @@ function hard(plateau, tab){
       }
     }
   }
+  //test de toute les case a coter de celle jouer pour en trouver une non jouer
+  //si aucune posibiliter, l'ia joue au hasard
   for (var i = 0; i < tab.length; i++) {
     for (var j = 0; j < tab[i].length; j++) {
       if(tab[i][j].value == IA){

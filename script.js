@@ -14,12 +14,14 @@ const DIF = "difficile";
 //click du joueur
 function playerPlay(event){
   var elementHTML = event.target;
-  var aqui = document.getElementById('qui');
-  if(deuxjoueur){
+  var aqui = document.getElementById('qui');// a qui de jouer
+  if(deuxjoueur){ //verification du mode de jeu
       if(qui == PLAYER){
-          console.log("hello");
+          //affiche la forme correspondante
           setCase(PLAYER, elementHTML);
+          //affiche le joueur uqi doit jouer
           aqui.innerHTML = "Joueur 2 doit jouer";
+          //
           qui = IA;
       }else if (qui == IA) {
           setCase(IA, elementHTML);
@@ -149,9 +151,11 @@ function reset(){
   for (var i = 0; i < elementJouer.length; i++) {
     elementJouer[i].classList = 'forme';
   }
+  //reinitialisation des tableaux
   plateauIa = initTab();
   plateau = initTab();
   elementJouer = [];
+  //efface le nom du gagant
   setTimeout(function(){document.getElementById('name').innerHTML =""},1000);
   ligne1 = [plateau[0][0],plateau[0][1],plateau[0][2]];
   ligne2 = [plateau[1][0],plateau[1][1],plateau[1][2]];
@@ -166,7 +170,7 @@ function reset(){
   return true;
 }
 
-var difficulter = FA;
+var difficulter;//initialiser dans initbutton
 var nul = []; //contient les valeur jouez, permet le reset si toute les case on eter jouer
 var indexnul = 0;//index pour le tableau nul
 var elementJouer = [];//tableau des element html jouez
@@ -175,6 +179,10 @@ var scoreIa = 0;
 var gagnant = 0;//identifiant du gagnant (1 = player)(2 = IA) (0= personne);
 var plateauIa;
 var plateau = initTab();
+
+//variables pour le mode deux joueur
+var qui = PLAYER;
+var deuxjoueur = false;
 
 //generation des ligne pour la verification et pour l'"ia"
 var ligne1 = [plateau[0][0],plateau[0][1],plateau[0][2]];
@@ -190,14 +198,18 @@ var diag2 = [plateau[0][2], plateau[1][1], plateau[2][0]];
 
 var tabIa =[ligne1,ligne2,ligne3,colonne1,colonne2,colonne3,diag1,diag2];
 
+//initialisation des bouton
 function initBouton(){
       var bout = document.getElementsByTagName('input');
       for (var i = 0; i < bout.length; i++) {
         bout[i].disabled = false;
+        // le jeu s'initialise en difficile
+        //le bouton difficile est desactiver
         if(bout[i].value == "difficile"){
             bout[i].disabled = true;
         }
       }
+      //passages du mode de jeu en difficile
       difficulter = DIF;
 };
 initBouton();
@@ -226,6 +238,3 @@ function initTab(){
   }
   return tab;
 }
-
-var qui = PLAYER;
-var deuxjoueur = false;
