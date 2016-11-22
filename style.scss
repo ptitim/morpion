@@ -1,13 +1,15 @@
 $height-titre : 15vh;
 $height-jeu : 100vh - $height-titre;
-$case : 20vh;
+$caseh : 20vh; $casew: 15vmax;//taille des case en affichage portrait et paysages
 $color : black;
 $background-color : silver;
 
 *{
   margin: 0;
   padding: 0;
+  box-sizing: border-box;
 }
+
 #titre{
     width: 100vw;
     height: 15vh;
@@ -29,16 +31,16 @@ $background-color : silver;
     justify-content: center;
     table{
         border: 1px solid red;
+        min-height: 100%;
         td{
             border: 1px solid black;
-            height:$case;
-            width: $case;
         }
     }
 }
 
 .score{
-    margin: $height-jeu/2-20 10vw;
+    margin: $height-jeu/2-20 5vw;
+    max-width: 5vw;
 }
 
 .forme{
@@ -46,8 +48,6 @@ $background-color : silver;
 }
 
 #player{
-    height: $case;
-    width: $case;
     border-radius: 50% 50%;
     position: relative;
     transform: scale(1.3);
@@ -76,12 +76,62 @@ $background-color : silver;
 }
 
 #ia{
-    height: $case;
-    width: $case;
     margin: auto;
-    height: 75%;
-    width: 75%;
-    border: 2px solid $color;
+    padding: 5px;
+    height: 70%;
+    width: 70%;
+    border: 4px solid $color;
     border-radius: 100%;
-    background-color: $background-color;
+    background-color: rgba(0, 0, 0, 0);
+
+}
+#faute{
+    display: none;
+}
+
+@media (orientation: landscape) {
+    td, .case{
+      height: $caseh;
+      width: $caseh;
+    }
+    .plateau{
+      width: 4*$caseh;
+    }
+    #player{
+      height: $caseh - 2;
+      width: $caseh - 2;
+    }
+}
+
+@media (orientation: portrait){
+  td, .case{
+    height: $casew;
+    width: $casew;
+  }
+  .plateau{
+    width: 4*$casew;
+  }
+  #player{
+    height: $caseh - 2;
+    width: $caseh - 2;
+  }
+
+}
+@media (max-width:400px){
+    td{
+      min-width: 50px;
+      min-height: 50px;
+    }
+}
+
+
+
+.putin{
+    overflow: hidden;
+    display: none;
+}
+
+.vlad{
+      height: 100%;
+      width: 100%;
 }
