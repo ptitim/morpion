@@ -58,7 +58,7 @@
     top: 15%;
     transform: rotate(45deg); }
 
-#ia {
+.ia {
   margin: auto;
   padding: 5px;
   height: 70%;
@@ -103,5 +103,19 @@
 .vlad {
   height: 100%;
   width: 100%; }
+
+input {
+  border: 2px solid darkgray;
+  background-color: silver;
+  color: black;
+  transition: all 0.3s linear;
+  padding: 1vh 1vw; }
+  input:hover {
+    background-color: darkgray;
+    color: white; }
+
+.disabled {
+  color: white;
+  background-color: black; }
 
 /*# sourceMappingURL=style.css.map */
