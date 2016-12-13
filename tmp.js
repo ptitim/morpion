@@ -1,6 +1,5 @@
 class VueGrille{
-    constructor(event){
-        this.event = event;
+    constructor(player, ia){
         let grille = document.createElement('table');
         for(let i = 0; i < 3; i++){
             let ligne = document.createElement('tr');
@@ -28,7 +27,7 @@ class VueGrille{
 
 class Ia{
     constructor(dif){
-
+        this.difficulty = dif;
     }
 
 }
@@ -42,8 +41,10 @@ class Player{
 class Game{
     constructor(){
         this.difficulty = 0;
-        this.board = new VueGrille(this.event);
         this.boardIa = [];
+        this.playerOne = new Player();
+        this.ia = new Ia(this.difficulty);
+        this.board = new VueGrille(this.player, this.ia);
         this.initButtons();
     }
 
@@ -53,6 +54,7 @@ class Game{
     initButtons(){
         this.buttons = document.getElementsByTagName('input');
         for(var i = 0; i < 5; i++){
+            this.buttons[i].dataset.dif = i;
             this.buttons[i].addEventListener("click",this.disabled);
         }
     }
@@ -63,6 +65,9 @@ class Game{
             this.buttons[i].className = "";
         }
         event.target.className = "disabled";
+    }
+    selectDificulty(event){
+        this.ia.difficulty = event.target.dataset.difficulty;
     }
 
 }
