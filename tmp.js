@@ -1,6 +1,20 @@
+const DEUXJOUEUR = 0;
+const FACILE = 1;
+const MOYEN = 2;
+const DIFFICILE = 3;
+const EXTREME = 4;
+const PLAYER = 0;
+const IA = 1;
+const DIFINIT = DEUXJOUEUR;
+
+const ROND = "rond";
+const CROIX = "croix";
+
 class VueGrille{
     constructor(player, ia){
-        let grille = document.createElement('table');
+        this.tabHtml = [];
+        this.grille = document.createElement('table');
+        var event = new Event();
         for(let i = 0; i < 3; i++){
             let ligne = document.createElement('tr');
             for(let j = 0; j < 3; j++){
@@ -8,21 +22,41 @@ class VueGrille{
 
                 let casePlayer = document.createElement('div');
                 casePlayer.className = "forme player";
+                casePlayer.dataset.forme = CROIX;
 
                 let caseIa = document.createElement('div');
                 caseIa.className = "forme ia";
+                caseIa.dataset.forme = ROND;
 
-                cases.appendChild(casePlayer);
                 cases.appendChild(caseIa);
+                cases.appendChild(casePlayer);
+                this.tabHtml.push(cases);
+                cases.addEventListener('click', this.playerPlay.bind(this));
                 ligne.appendChild(cases);
+                // 
             }
-            grille.appendChild(ligne);
+            this.grille.appendChild(ligne);
         }
-        document.getElementById('plateau').appendChild(grille);
+        document.getElementById('plateau').appendChild(this.grille);
     }
+
     getBoard(){
         return this.grille;
     }
+
+    playerPlay(event){
+        this.setCase(CROIX, event.target);
+    }
+    setCase(forme, eleHtml){
+        if(eleHtml){
+            eleHtml.removeEventListener('click', this.playerPlay);
+            for(let i =0; i < eleHtml.children.length ; i++){
+                eleHtml.children[i].dataset.forme == forme ? eleHtml.children[i].classList.remove('forme'): null;
+            }
+        }else{
+        }
+    }
+
 }
 
 class Ia{
@@ -33,8 +67,8 @@ class Ia{
 }
 
 class Player{
-    constructor(){
-
+    constructor(name = "Player"){
+        this.name = name;
     }
 }
 
@@ -56,6 +90,7 @@ class Game{
         for(var i = 0; i < 5; i++){
             this.buttons[i].dataset.dif = i;
             this.buttons[i].addEventListener("click",this.disabled);
+            this.buttons[i].dataset.dif == DIFINIT ? this.buttons[i].disabled  = true : this.buttons[i].disabled = false;      
         }
     }
 
