@@ -12,9 +12,10 @@ const CROIX = "croix";
 
 class VueGrille{
     constructor(player, ia){
+        this.player = player;
+        this.ia = ia;
         this.tabHtml = [];
         this.grille = document.createElement('table');
-        var event = new Event();
         for(let i = 0; i < 3; i++){
             let ligne = document.createElement('tr');
             for(let j = 0; j < 3; j++){
@@ -45,7 +46,7 @@ class VueGrille{
     }
 
     playerPlay(event){
-        this.setCase(CROIX, event.target);
+        this.player.play(this.setCase, event.target);
     }
     setCase(forme, eleHtml){
         if(eleHtml){
@@ -70,11 +71,15 @@ class Player{
     constructor(name = "Player"){
         this.name = name;
     }
+    play(caller, ele){
+        caller(ele)
+
+    }
 }
 
 class Game{
     constructor(){
-        this.difficulty = 0;
+        this.difficulty = DEUXJOUEUR;
         this.boardIa = [];
         this.playerOne = new Player();
         this.ia = new Ia(this.difficulty);
