@@ -287,13 +287,13 @@ function feedBack(tab, colorChoose){
             else
               tab[a][j].style.background = gagnez;
           }
-          setTimeout(function(){test(tab[a])}, 1000);
+          setTimeout(function(){resetBackground(tab[a])}, 1000);
       }
     }
 }
 
 
-function test(tab){
+function resetBackground(tab){
     for (var i = 0; i < tab.length; i++) {
       tab[i].style.backgroundColor = "silver";
     }
