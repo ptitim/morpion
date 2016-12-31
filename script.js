@@ -66,7 +66,6 @@ function playerPlay(event){
 }
 
 function setCase(who ,ele){
-
   if(ele){ //verifies is the html element exist
     ele.removeEventListener("click",playerPlay);//remove the click
     plateauIa = majTab(plateauIa, ele);//delete where the player has played
@@ -135,7 +134,6 @@ function choixDifficulter(e){
 
 //verification des ligne rempli
 function genereVerif(){
-
   if(verif(ligne1) || verif(ligne2) || verif(ligne3) || verif(colonne1) || verif(colonne2) || verif(colonne3)
   || verif(diag1) || verif(diag2)){
     var e = document.getElementById('name');

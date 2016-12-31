@@ -14,16 +14,14 @@
             MOPRION
           </p>
       </div>
-      <div id="qui">
-
-      </div>
       <div class="difficulter">
-        <input type="button" name="name" value="deux joueur" id="deuxjoueur" onclick="choixDifficulter(this)">
-        <input type="button" name="facile" value="facile" id="facile" disabled="true" onclick="choixDifficulter(this)">
-        <input type="button" name="moyen" value="moyen" id="moyen" onclick="choixDifficulter(this)">
-        <input type="button" name="difficile" value="difficile" id="difficile" onclick="choixDifficulter(this)">
-        <input type="button" name="extreme" value="Sang daifod" id="extreme" onclick="choixDifficulter(this)">
+        <input type="button" name="name" value="deux joueur" id="deuxjoueur">
+        <input type="button" name="facile" value="facile" id="facile">
+        <input type="button" name="moyen" value="moyen" id="moyen">
+        <input type="button" name="difficile" value="difficile" id="difficile">
+        <input type="button" name="extreme" value="Sang daifod" id="extreme">
         <span id="faute">mais avec des fautes d'orthographe</span>
+        <span id="qui"></span>
       </div>
       <div id="jeu">
           <div id="scoreJoueur">
@@ -31,71 +29,22 @@
                 Joueur 1 score <span id="afgScore">0</span>.
               </p>
           </div>
-          <table>
-              <tr>
-                <td class="case">
-                  <div class="forme" id="player"></div>
-                  <div class="forme" id="ia"></div>
-                </td>
-                <td class="case">
-                  <div class="forme" id="player"></div>
-                  <div class="forme" id="ia"></div>
-
-                </td>
-                <td class="case">
-                  <div class="forme" id="player"></div>
-                  <div class="forme" id="ia"></div>
-
-                </td>
-              </tr>
-              <tr>
-                <td class="case">
-                  <div class="forme" id="player"></div>
-                  <div class="forme" id="ia"></div>
-
-                </td>
-                <td class="case">
-                  <div class="forme" id="player"></div>
-                  <div class="forme" id="ia"></div>
-
-                </td>
-                <td class="case">
-                  <div class="forme" id="player"></div>
-                  <div class="forme" id="ia"></div>
-
-                </td>
-              </tr>
-              <tr>
-                <td class="case">
-                  <div class="forme" id="player"></div>
-                  <div class="forme" id="ia"></div>
-
-                </td>
-                <td class="case">
-                  <div class="forme" id="player"></div>
-                  <div class="forme" id="ia"></div>
-
-                </td>
-                <td class="case">
-                  <div class="forme" id="player"></div>
-                  <div class="forme" id="ia"></div>
-
-                </td>
-              </tr>
-          </table>
+          <div id="plateau">
+            
+          </div>
           <div id="scoreIa">
               <p class="score">
                 Joueur 2 score <span id="afgIa">0</span>.
               </p>
           </div>
       </div>
-      <div id="gagnant">
+      <div id="gagnant" style="display: none">
           <p>
             AND THE WINNER IS <span id="name"></span>
           </p>
       </div>
   </body>
-  <script src="script.js">
+  <script src="tmp.js">
 
   </script>
 </html>
