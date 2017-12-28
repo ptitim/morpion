@@ -11,6 +11,7 @@ function easy(plateau){
 //prend un tableau representant les ligne gagnante
 function medium (plateau, tab){
   var intel = false; //pour le cas ou l'ia joue par rapport aujouer sinon joue au hasard
+  
   for (var i = 0; i < tab.length; i++) {
     var compteur = 0;
     var e = undefined;
@@ -41,7 +42,7 @@ function medium (plateau, tab){
 //prend un tableau representant les ligne gagnante
 function hard(plateau, tab){
   var intel = false;
-  //verifie si elle peu gagner
+  //verifie si elle peut gagner
   for (var i = 0; i < tab.length; i++) {
     var compteur = 0;
     var e = undefined;
@@ -60,6 +61,7 @@ function hard(plateau, tab){
       }
     }
   }
+
   for (var i = 0; i < tab.length; i++) {
     var compteur = 0;
     var e = undefined;
